@@ -1,7 +1,7 @@
 tool
 extends ToolButton
 
-var plugin #A reference to the config dialog, provided by the EditorPlugin (plugin.gd)
+var c #A reference to the config dialog, provided by the EditorPlugin (plugin.gd)
 var exe="" #String to editor executable
 var res    #Reference to the editor's currently selected resource.
 
@@ -28,4 +28,4 @@ func _on_ToolButton_pressed():
 
 #Right-click menu selected
 func _launchSettings(idx):
-	plugin.c.popup_centered()
+	c.popup_centered()

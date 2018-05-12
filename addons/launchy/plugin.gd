@@ -14,7 +14,7 @@ func _enter_tree():
 	#Setup the scene instances.
 	b = preload("res://addons/launchy/launchbutton.tscn").instance()
 	c = load("res://addons/launchy/config.tscn").instance()
-	b.plugin = self
+	b.c = c  
 	c.editor_settings = editor_settings
 
 	add_control_to_container(CONTAINER_PROPERTY_EDITOR_BOTTOM, b)
