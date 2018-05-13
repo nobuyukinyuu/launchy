@@ -7,4 +7,4 @@ When activated for the first time, Launchy will modify your global editor settin
 ![image](https://user-images.githubusercontent.com/1023003/39945324-af921ff8-552f-11e8-95cc-46b233e00a3b.png)
 
 
-**WARNING:** As of right now, there is a bug in the way Godot 3.0.2 handles popups spawned by an editor plugin which may cause your editor to become unresponsive shortly after closing.  Please be aware of this before launching the config popup.
+**WARNING:** As of right now, there is a bug in the way Godot 3.0.2 handles popups spawned by an editor plugin which may cause your editor to become unresponsive shortly after closing.  Please be aware of this before launching the config popup.  Normal operation of this plugin once configured should be unaffected.
