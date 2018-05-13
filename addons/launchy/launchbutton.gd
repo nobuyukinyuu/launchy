@@ -1,19 +1,20 @@
 tool
 extends ToolButton
 
-var c #A reference to the config dialog, provided by the EditorPlugin (plugin.gd)
+var plugin #A reference to the EdititorPlugin, provided by `plugin.gd`
 var exe="" #String to editor executable
 var res    #Reference to the editor's currently selected resource.
 
 func _ready():
 	self.connect("pressed", self, "_on_ToolButton_pressed")
-	$PopupMenu.connect("index_pressed", self, '_launchSettings')
+#	$PopupMenu.connect("index_pressed", self, '_launchSettings')
 
 #For right clicking.
 func _gui_input(event):
 	if event is InputEventMouseButton and event.button_index == BUTTON_RIGHT:
-		$PopupMenu.rect_global_position = self.rect_global_position
-		$PopupMenu.popup()
+#		$PopupMenu.rect_global_position = self.rect_global_position
+#		$PopupMenu.popup()
+		_launchSettings(0)
 
 #For left clicking.
 func _on_ToolButton_pressed():
@@ -28,4 +29,4 @@ func _on_ToolButton_pressed():
 
 #Right-click menu selected
 func _launchSettings(idx):
-	c.popup_centered()
+	plugin.launchConfigPopup()

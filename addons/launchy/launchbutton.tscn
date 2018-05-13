@@ -48,5 +48,6 @@ size_flags_vertical = 1
 popup_exclusive = false
 items = [ "Setup Associations...", null, false, false, false, -1, 0, null, "", false ]
 hide_on_state_item_selection = false
+_sections_unfolded = [ "Popup" ]
 
 
