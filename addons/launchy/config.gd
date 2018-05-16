@@ -23,6 +23,7 @@ func _ready():
 
 	connect("about_to_show",self, "_about_to_show")
 
+#Add an association
 func _on_btnAdd_pressed():
 	var key = $MarginContainer/LineEditResType.text
 	var value = $MarginContainer/LineEditPath.text
@@ -62,7 +63,7 @@ func saveSettingsToEditor():
 	editor_settings.set_setting('editors/external/associations', $ConfigItems.settings)
 	#TODO:  Tell EditorPlugin instance that it needs to update its copy of settings
 	#		so that it can handle the new types.
-
+	$"..".plugin.updateHandlerSettings()
 
 func _on_ConfigItems_item_edited():
 	$HBoxOKCancel/Apply.disabled = false

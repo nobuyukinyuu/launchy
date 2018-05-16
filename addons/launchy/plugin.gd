@@ -13,7 +13,7 @@ var settings = editor_settings.get_setting('editors/external/associations')  #Di
 func _enter_tree():
 	#Setup the scene instances.
 	b = preload("res://addons/launchy/launchbutton.tscn").instance()
-	c = load("res://addons/launchy/config.tscn").instance()
+	c = b.get_node("Config")
 	b.plugin = self 
 	c.editor_settings = editor_settings
 
@@ -25,7 +25,7 @@ func _enter_tree():
 #	add_tool_menu_item("Edit Associations", c, callback)
 	
 	#We add the config dialog to the scene tree so that we can call it.
-	interface.get_editor_viewport().add_child(c, true)
+#	interface.get_editor_viewport().add_child(c, true)
 	#Connect popup closing so we can update our handler to the latest associations.
 	c.connect('popup_hide', self, '_on_config_popup_closing')
 
@@ -49,7 +49,7 @@ func _enter_tree():
 		c.get_node('./ConfigItems').settings = settings
 #		yield(get_tree(), 'idle_frame')
 #		yield(get_tree(), 'idle_frame')
-		c.popup_centered()
+		launchConfigPopup()
 #		c.get_node('ConfigItems').populate(settings,true)
 	else:
 		print ("Launchy is loaded. Settings are located in Editor Settings->Editors->External->Associations.")
@@ -89,21 +89,21 @@ func make_visible(visible):
 					if current_object.is_class(type):
 						b.exe = settings[type]
 
-#Called from our sweet summer child, `b` because otherwise 3.0.2 will hang 
-#if the popup is called from there by reference.
 func launchConfigPopup():
 	print("Launchy: Modifying associations...")
 	settings = editor_settings.get_setting('editors/external/associations')
 	c.get_node('./ConfigItems').settings = settings
 	c.popup_centered()
 func _on_config_popup_closing():
+	updateHandlerSettings()
+
+func updateHandlerSettings():
 	#Update our settings for the visibility handler.
 	settings = editor_settings.get_setting('editors/external/associations')
-	
+
 
 
 func _exit_tree():
 	# Clean-up of the plugin goes here
-#	if b != null:  b.free()
-	if c != null:  c.free()
 	remove_control_from_container(CONTAINER_PROPERTY_EDITOR_BOTTOM, b) 
+	b = null

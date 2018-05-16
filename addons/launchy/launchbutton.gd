@@ -11,9 +11,7 @@ func _ready():
 
 #For right clicking.
 func _gui_input(event):
-	if event is InputEventMouseButton and event.button_index == BUTTON_RIGHT:
-#		$PopupMenu.rect_global_position = self.rect_global_position
-#		$PopupMenu.popup()
+	if event is InputEventMouseButton and event.button_index == BUTTON_RIGHT and event.pressed == true:
 		_launchSettings(0)
 
 #For left clicking.
@@ -29,4 +27,4 @@ func _on_ToolButton_pressed():
 
 #Right-click menu selected
 func _launchSettings(idx):
-	plugin.launchConfigPopup()
+	$Config.popup_centered()
