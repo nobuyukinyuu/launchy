@@ -7,6 +7,7 @@ var res    #Reference to the editor's currently selected resource.
 
 func _ready():
 	self.connect("pressed", self, "_on_ToolButton_pressed")
+	$Config.editor_settings = plugin.editor_settings
 #	$PopupMenu.connect("index_pressed", self, '_launchSettings')
 
 #For right clicking.

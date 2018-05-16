@@ -47,14 +47,10 @@ func _enter_tree():
 		print ("Launchy: External editor associations not yet set.")
 #		print ("Go to Project->Tools->Launchy: Edit Associations to set some editors.\n")
 		c.get_node('./ConfigItems').settings = settings
-#		yield(get_tree(), 'idle_frame')
-#		yield(get_tree(), 'idle_frame')
 		launchConfigPopup()
-#		c.get_node('ConfigItems').populate(settings,true)
 	else:
 		print ("Launchy is loaded. Settings are located in Editor Settings->Editors->External->Associations.")
 		c.get_node('./ConfigItems').settings = settings
-#		c.get_node('ConfigItems').populate(settings,true)
 
 
 #Called whenever the editor selection changes.

@@ -69,7 +69,7 @@ size_flags_horizontal = 1
 size_flags_vertical = 1
 popup_exclusive = false
 window_title = "Configure Associations..."
-resizable = false
+resizable = true
 script = ExtResource( 3 )
 _sections_unfolded = [ "Popup" ]
 
