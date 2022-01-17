@@ -22,6 +22,7 @@ func _ready():
 	$ConfigItems.set_column_expand(0, true)
 
 	connect("about_to_show",self, "_about_to_show")
+	
 
 #Add an association
 func _on_btnAdd_pressed():

@@ -10,7 +10,9 @@ var editor_settings = interface.get_editor_settings()
 var current_object  #currently selected object in the editor
 var settings = editor_settings.get_setting('editors/external/associations')  #Dict
 
-func _enter_tree():
+const MENU_LABEL = "Launchy:  Edit Associations..."
+
+func _ready():
 	#Setup the scene instances.
 	b = preload("res://addons/launchy/launchbutton.tscn").instance()
 	c = b.get_node("Config")
@@ -19,10 +21,12 @@ func _enter_tree():
 
 	add_control_to_container(CONTAINER_PROPERTY_EDITOR_BOTTOM, b)
 	b.visible = false
+	b.stylize()
 
 #Setup config popup.
 	#This won't work until Godot 3.1, so instead we'll load settings from the control.
 #	add_tool_menu_item("Edit Associations", c, callback)
+	add_tool_menu_item(MENU_LABEL, self, "launchConfigPopup", true)
 	
 	#We add the config dialog to the scene tree so that we can call it.
 #	interface.get_editor_viewport().add_child(c, true)
@@ -45,11 +49,12 @@ func _enter_tree():
 	
 	if settings.empty() == true:
 		print ("Launchy: External editor associations not yet set.")
-#		print ("Go to Project->Tools->Launchy: Edit Associations to set some editors.\n")
+		print ("Go to Project->Tools->Launchy: Edit Associations to set some.\n")
+		print ("Settings are located in Editor Settings->Editors->External->Associations.")
 		c.get_node('./ConfigItems').settings = settings
 		launchConfigPopup()
 	else:
-		print ("Launchy is loaded. Settings are located in Editor Settings->Editors->External->Associations.")
+		print ("Launchy is loaded. Edit settings in Project->Tools->Launchy: Edit Associations.")
 		c.get_node('./ConfigItems').settings = settings
 
 
@@ -85,7 +90,11 @@ func make_visible(visible):
 					if current_object.is_class(type):
 						b.exe = settings[type]
 
-func launchConfigPopup():
+func launchConfigPopup(param=null):
+	if param is bool:
+		c.popup_exclusive = param
+		
+		
 	print("Launchy: Modifying associations...")
 	settings = editor_settings.get_setting('editors/external/associations')
 	c.get_node('./ConfigItems').settings = settings
@@ -102,4 +111,5 @@ func updateHandlerSettings():
 func _exit_tree():
 	# Clean-up of the plugin goes here
 	remove_control_from_container(CONTAINER_PROPERTY_EDITOR_BOTTOM, b) 
+	remove_tool_menu_item(MENU_LABEL)
 	b = null

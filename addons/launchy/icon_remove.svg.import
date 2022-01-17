@@ -3,20 +3,21 @@
 importer="texture"
 type="StreamTexture"
 path="res://.import/icon_remove.svg-0b2d5439d9395872e0914713255ca746.stex"
+metadata={
+"vram_texture": false
+}
 
 [deps]
 
 source_file="res://addons/launchy/icon_remove.svg"
-source_md5="a215dd8a992e9d84dcaf300fd1538737"
-
 dest_files=[ "res://.import/icon_remove.svg-0b2d5439d9395872e0914713255ca746.stex" ]
-dest_md5="80fb2e2ea54d2400f31588a32dc8f92c"
 
 [params]
 
 compress/mode=0
 compress/lossy_quality=0.7
 compress/hdr_mode=0
+compress/bptc_ldr=0
 compress/normal_map=0
 flags/repeat=0
 flags/filter=true
@@ -26,6 +27,8 @@ flags/srgb=2
 process/fix_alpha_border=true
 process/premult_alpha=false
 process/HDR_as_SRGB=false
+process/invert_color=false
+process/normal_map_invert_y=false
 stream=false
 size_limit=0
 detect_3d=true
