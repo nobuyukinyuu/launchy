@@ -70,7 +70,7 @@ func handles(object):
 	#When choosing the application to launch, we should probably
 	#go through the entire set of keys to check for if an exact class is found.
 	for type in settings.keys():
-		if object.is_class(type):
+		if object.is_class(type) or get_object_type(object) == type:
 			return true
 	return false
 
@@ -81,14 +81,22 @@ func make_visible(visible):
 		if visible == true:
 			if current_object is Resource:  b.res = current_object
 			#Set the launch exe to the most specific class we can get.
-			if settings.has(current_object.get_class()):
-				b.exe = settings[current_object.get_class()]
+			if settings.has(get_object_type(current_object)):
+				b.exe = settings[get_object_type(current_object)]
 			else:  #Exact match not found.  Search for a base class.
 				#TODO:  Maybe walk the inheretance tree recursively up to find the
 				#       subclass which matches the closest to current_object type
 				for type in settings.keys():
 					if current_object.is_class(type):
 						b.exe = settings[type]
+
+func get_object_type(object: Object):
+	if object.get_script() != null:
+		var name: String = object.get_script().resource_path.get_basename().get_file()
+		if name in settings:
+			return name
+	else:
+		return object.get_class()
 
 func launchConfigPopup(param=null):
 	if param is bool:
