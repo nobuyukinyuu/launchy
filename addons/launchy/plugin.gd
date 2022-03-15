@@ -9,6 +9,7 @@ var interface = get_editor_interface()
 var editor_settings = interface.get_editor_settings()
 var current_object  #currently selected object in the editor
 var settings = editor_settings.get_setting('editors/external/associations')  #Dict
+var custom_type_cache: Dictionary = {}
 
 const MENU_LABEL = "Launchy:  Edit Associations..."
 
@@ -91,10 +92,29 @@ func make_visible(visible):
 						b.exe = settings[type]
 
 func get_object_type(object: Object):
-	if object.get_script() != null:
+	
+	var script: Script = object.get_script()
+	if script != null:
+		
+		# Check cache for this object type
+		if object in custom_type_cache:
+			return custom_type_cache[script.resource_path]
+		
+		if object is GDScript:
+			
+			# Parse source code to find class name
+			var source_code: String = object.get_script().source_code
+			for line in source_code.split("\n"):
+				if line.begins_with("class_name "):
+					custom_type_cache[script.resource_path] = line.trim_prefix("class_name ").strip_edges()
+					return custom_type_cache[script.resource_path]
+		
+		# If script has no class_name, return file name instead
 		var name: String = object.get_script().resource_path.get_basename().get_file()
 		if name in settings:
+			custom_type_cache[script.resource_path] = name
 			return name
+		
 	else:
 		return object.get_class()
 
