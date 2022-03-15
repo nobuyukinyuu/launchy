@@ -97,7 +97,7 @@ func get_object_type(object: Object):
 	if script != null:
 		
 		# Check cache for this object type
-		if object in custom_type_cache:
+		if script.resource_path in custom_type_cache:
 			return custom_type_cache[script.resource_path]
 		
 		if object is GDScript:
@@ -110,7 +110,7 @@ func get_object_type(object: Object):
 					return custom_type_cache[script.resource_path]
 		
 		# If script has no class_name, return file name instead
-		var name: String = object.get_script().resource_path.get_basename().get_file()
+		var name: String = script.resource_path.get_basename().get_file()
 		if name in settings:
 			custom_type_cache[script.resource_path] = name
 			return name
