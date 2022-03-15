@@ -100,11 +100,10 @@ func get_object_type(object: Object):
 		if script.resource_path in custom_type_cache:
 			return custom_type_cache[script.resource_path]
 		
-		if object is GDScript:
+		if script is GDScript:
 			
-			# Parse source code to find class name
-			var source_code: String = object.get_script().source_code
-			for line in source_code.split("\n"):
+			# Parse source code to find class_name
+			for line in script.source_code.split("\n"):
 				if line.begins_with("class_name "):
 					custom_type_cache[script.resource_path] = line.trim_prefix("class_name ").strip_edges()
 					return custom_type_cache[script.resource_path]
